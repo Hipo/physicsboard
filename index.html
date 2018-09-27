@@ -72,7 +72,7 @@
                 // No colors were detected in this frame.
             } else {
                 event.data.forEach(function (rect) {
-                    let [newX, newY] = [(rect.x + rect.width / 2), (rect.y + rect.height / 2)]
+                    let [newY, newX] = [(rect.x + rect.width / 2) + 170, globalHeight - (rect.y + rect.height / 2) - 50]
                     let options = {
                         render: {
                             fillStyle: 'white'
