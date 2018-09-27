@@ -10,7 +10,7 @@
         #world {
             position: absolute;
             top: 0;
-            opacity: 0.5;
+            opacity: 0.9;
             background-color: white;
         }
 
@@ -50,7 +50,7 @@
                 width: globalWidth,
                 height: globalHeight,
                 wireframes: false,
-                background: "white"
+                // background: "white"
             }
         });
 
@@ -63,7 +63,7 @@
 
         setInterval(() => {
             let randX = Math.floor(Math.random() * 1000);
-            let ball = Bodies.circle(randX, 0, 10, {render: {fillStyle: 'brown'}});
+            let ball = Bodies.circle(randX, 0, 10, {render: {fillStyle: 'green'}});
             World.add(engine.world, [ball]);
         }, 1000);
 
@@ -75,7 +75,7 @@
                     let [newX, newY] = [(rect.x + rect.width / 2), (rect.y + rect.height / 2)]
                     let options = {
                         render: {
-                            fillStyle: 'blue'
+                            fillStyle: 'white'
                         },
                         isStatic: true
                     };
