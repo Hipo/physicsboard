@@ -32,11 +32,12 @@ tracking.track('#myVideo', colors, { camera: true });
 let Engine = Matter.Engine,
     Render = Matter.Render,
     World = Matter.World,
-    Bodies = Matter.Bodies;
+    Bodies = Matter.Bodies,
+    Events = Matter.Events;
     
 // Bodies references
 let bricks = [];
-let ground = Bodies.rectangle(0, globalHeight, globalWidth * 2, 100, { isStatic: true });
+let ground = Bodies.rectangle(0, globalHeight, globalWidth * 2, 100, { isStatic: true, label: 'Ground' });
 
 // Prepare world
 let engine = Engine.create();
@@ -60,9 +61,18 @@ setInterval(() => {
     let randX = Math.floor(Math.random() * 1000);
     let ball = Bodies.circle(randX, 0, 10, { render: { fillStyle: 'white' }, restitution: 0.5 });
     World.add(engine.world, [ball]);
-    setTimeout(() => {
-        World.remove(engine.world, ball);
-    }, 10000);
+    Events.on(engine, 'collisionStart', (event) => {
+        for (let pair of event.pairs) {
+            const {bodyA, bodyB} = pair;
+            if (bodyA.label == 'Circle Body' && bodyB.label == 'Ground') {
+                World.remove(engine.world, bodyA);
+            }
+            if (bodyB.label == 'Circle Body' && bodyA.label == 'Ground') {
+                World.remove(engine.world, bodyB);
+            }
+        }
+        
+    });
 }, 1000);
 
 let drawBrick = (rect) => {
