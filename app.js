@@ -58,7 +58,7 @@ Render.run(render);
 
 // Shit that runs this thing
 setInterval(() => {
-    let randX = Math.floor(Math.random() * 1000);
+    let randX = Math.floor(Math.random() * globalWidth);
     let ball = Bodies.circle(randX, 0, 10, { render: { fillStyle: 'white' }, restitution: 0.5 });
     World.add(engine.world, [ball]);
     Events.on(engine, 'collisionStart', (event) => {
