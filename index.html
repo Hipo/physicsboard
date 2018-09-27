@@ -11,31 +11,29 @@
             position: absolute;
             top: 0;
             opacity: 0.9;
-            background-color: white;
         }
 
         #myVideo {
-            /* transform: rotate(90deg); */
-            object-fit: fill;
             opacity: 1;
+            position: absolute;
         }
     </style>
 </head>
 
 <body>
     <div class="video-wrapper">
-        <video id="myVideo" width="360" height="640" preload autoplay loop muted ></video>
+        <video id="myVideo" width="640" height="480" preload autoplay loop muted></video>
         <div id="world"></div>
     </div>
 
     <script>
-        let invertCoordinates = true;
-        let [globalWidth, globalHeight] = [640, 360]
+        let invertCoordinates = false;
+        let [globalWidth, globalHeight] = [640, 480]
         if (invertCoordinates) {
             [globalWidth, globalHeight] = [globalHeight, globalWidth];
         }
-        
-        let colors = new tracking.ColorTracker(['magenta', 'cyan', 'yellow']);
+
+        let colors = new tracking.ColorTracker(['magenta', 'cyan']);
         let Engine = Matter.Engine,
             Render = Matter.Render,
             World = Matter.World,
@@ -50,7 +48,7 @@
                 width: globalWidth,
                 height: globalHeight,
                 wireframes: false,
-                // background: "white"
+                background: "black"
             }
         });
 
@@ -61,26 +59,43 @@
         Engine.run(engine);
         Render.run(render);
 
+        let balls = [];
+
         setInterval(() => {
             let randX = Math.floor(Math.random() * 1000);
-            let ball = Bodies.circle(randX, 0, 10, {render: {fillStyle: 'green'}});
+            let ball = Bodies.circle(randX, 0, 10, { render: { fillStyle: 'white' } });
             World.add(engine.world, [ball]);
+            balls.push(ball);
         }, 1000);
+
+        let drawBrick = (rect) => {
+            // let [newY, newX] = [(rect.x + rect.width / 2) + 170, globalHeight - (rect.y + rect.height / 2) - 50]
+            let [newX, newY] = [(rect.x + rect.width / 2), (rect.y + rect.height / 2)]
+            let options = {
+                render: {
+                    fillStyle: 'white'
+                },
+                isStatic: true
+            };
+            let brick = Bodies.rectangle(newX, newY, 10, 5, options);
+            World.add(engine.world, [brick]);
+        };
+
+        let eraseBrick = (rect) => {
+
+        };
 
         colors.on('track', function (event) {
             if (event.data.length === 0) {
                 // No colors were detected in this frame.
             } else {
                 event.data.forEach(function (rect) {
-                    let [newY, newX] = [(rect.x + rect.width / 2) + 170, globalHeight - (rect.y + rect.height / 2) - 50]
-                    let options = {
-                        render: {
-                            fillStyle: 'white'
-                        },
-                        isStatic: true
-                    };
-                    let brick = Bodies.rectangle(newX, newY, 10, 5, options);
-                    World.add(engine.world, [brick]);
+                    if (rect.color === 'magenta') {
+                        drawBrick(rect);
+                    }
+                    if (rect.color === 'cyan') {
+                        eraseBrick(rect);
+                    }
                 });
             }
         });
