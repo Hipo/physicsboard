@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>tracking.js - first tracking</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tracking.js/1.1.3/tracking.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.12.0/matter.js"></script>
+    <style>
+        #world {
+            position: absolute;
+            top: 0;
+            opacity: 0.5;
+            background-color: white;
+        }
+
+        #myVideo {
+            /* transform: rotate(90deg); */
+            object-fit: fill;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="video-wrapper">
+        <video id="myVideo" width="360" height="640" preload autoplay loop muted ></video>
+        <div id="world"></div>
+    </div>
+
+    <script>
+        let invertCoordinates = true;
+        let [globalWidth, globalHeight] = [640, 360]
+        if (invertCoordinates) {
+            [globalWidth, globalHeight] = [globalHeight, globalWidth];
+        }
+        
+        let colors = new tracking.ColorTracker(['magenta', 'cyan', 'yellow']);
+        let Engine = Matter.Engine,
+            Render = Matter.Render,
+            World = Matter.World,
+            Bodies = Matter.Bodies;
+
+        let engine = Engine.create();
+
+        let render = Render.create({
+            element: document.querySelector('#world'),
+            engine: engine,
+            options: {
+                width: globalWidth,
+                height: globalHeight,
+                wireframes: false,
+                background: "white"
+            }
+        });
+
+
+        let ground = Bodies.rectangle(0, globalHeight, globalWidth, 100, { isStatic: true });
+        World.add(engine.world, [ground]);
+
+        Engine.run(engine);
+        Render.run(render);
+
+        setInterval(() => {
+            let randX = Math.floor(Math.random() * 1000);
+            let ball = Bodies.circle(randX, 0, 10, {render: {fillStyle: 'brown'}});
+            World.add(engine.world, [ball]);
+        }, 1000);
+
+        colors.on('track', function (event) {
+            if (event.data.length === 0) {
+                // No colors were detected in this frame.
+            } else {
+                event.data.forEach(function (rect) {
+                    let [newX, newY] = [(rect.x + rect.width / 2), (rect.y + rect.height / 2)]
+                    let options = {
+                        render: {
+                            fillStyle: 'blue'
+                        },
+                        isStatic: true
+                    };
+                    let brick = Bodies.rectangle(newX, newY, 10, 5, options);
+                    World.add(engine.world, [brick]);
+                });
+            }
+        });
+
+        tracking.track('#myVideo', colors, { camera: true });
+
+    </script>
+
+</body>
+
+</html>
