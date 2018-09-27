@@ -94,7 +94,7 @@ let getDistance = (pos1, pos2) => {
 };
 
 let eraseBrick = (rect) => {
-    const threshold = 100;
+    const threshold = 50;
     for (let brick of bricks) {
         let distance = getDistance(rect, brick.position)
         if (distance <= threshold) {
