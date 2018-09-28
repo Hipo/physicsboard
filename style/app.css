@@ -1,0 +1,51 @@
+@font-face {
+  src: url('../fonts/Proxima\ Nova\ Xbold.otf') format("opentype");
+  font-family: 'proxima-nova-xbold';
+  font-weight: 700;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'proxima-nova-xbold';
+}
+
+.particles-container {
+  position: fixed;
+  
+  width: 100vw;
+  height: 100vh;
+}
+
+.physicsboard-logo {
+  position: absolute;
+  top: 195px;
+  left: 50%;
+
+  transform: translateX(-50%);
+}
+
+.start-button {
+  position: absolute;
+  bottom: 20%;
+  left: calc(50% - 85px);
+
+  width: 170px;
+  height: 60px;
+
+  background: none;
+  border: 2px solid #0043FF;
+  cursor: pointer;
+  outline: none;
+  color: #0043FF;
+
+  font-size: 25px;
+  text-transform: uppercase;
+
+  transition: all .4s ease;
+}
+
+.start-button:hover {
+  background: #0043FF;
+  color: #FFFFFF;
+}
