@@ -49,3 +49,9 @@
   background: #0043FF;
   color: #FFFFFF;
 }
+
+.zoom {
+  zoom: 3.5;
+  -moz-transform: scale(3.5);
+  -moz-transform-origin: 0 0;
+}

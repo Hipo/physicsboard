@@ -1,5 +1,5 @@
 let invertCoordinates = false;
-let [globalWidth, globalHeight] = [640, 480]
+let [globalWidth, globalHeight] = [400, 225]
 if (invertCoordinates) {
     [globalWidth, globalHeight] = [globalHeight, globalWidth];
 }
