@@ -143,7 +143,7 @@ const curve1 = Bodies.rectangle(50, globalHeight / 4, globalWidth / 3.5, 5, {
 Matter.Body.rotate(curve1, PI / 9);
 obstacles.push(curve1);
 
-const curve2 = Bodies.rectangle(globalWidth * (1.5 / 3), globalHeight / 2, globalWidth / 5, 5, {
+const curve2 = Bodies.rectangle(globalWidth * (2 / 3), globalHeight / 2, globalWidth / 5, 5, {
   isStatic: true,
   angularVelocity: 50,
   angularSpeed: 50,

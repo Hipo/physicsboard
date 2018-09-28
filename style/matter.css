@@ -1,14 +1,14 @@
 #world {
   position: absolute;
   top: 0;
-  opacity: 0.5;
+  opacity: 1;
   background-color: white;
 }
 
 #myVideo {
   /* transform: rotate(90deg); */
   object-fit: fill;
-  opacity: 1;
+  opacity: 0;
 }
 
 /* .video-wrapper {
