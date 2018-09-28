@@ -1,0 +1,62 @@
+#world {
+  position: absolute;
+  top: 0;
+  opacity: 0.5;
+  background-color: white;
+}
+
+#myVideo {
+  /* transform: rotate(90deg); */
+  object-fit: fill;
+  opacity: 1;
+}
+
+/* .video-wrapper {
+  display: none;
+} */
+
+.game-end-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-wrapper {
+  background: #1BF0AA;
+}
+
+.fail-wrapper {
+  background: #FF4D4D;
+}
+
+.success-message {
+  margin: 90px 0 0;
+
+  color: #ffffff;
+
+  font-size: 36px;
+}
+
+.retry-button {
+  width: 170px;
+  height: 60px;
+
+  margin: 90px 0 0;
+
+  background: none;
+  border: 2px solid #FFFFFF;
+  color: #FFFFFF;
+  cursor: pointer;
+  outline: none;
+
+  text-transform: uppercase;
+
+  transition: all .4s ease;
+}
+
+.retry-button:hover {
+  background: #FFFFFF;
+  color: #FF4D4D;
+  border-color: #FFFFFF;
+}
