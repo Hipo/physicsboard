@@ -6,7 +6,6 @@ if (invertCoordinates) {
 let isFinished = false;
 let currentLevel = +window.location.search.match(/[1-9]+/)[0];
 let rotationInterval;
-let ballSize = 6 + Math.floor(Math.random() * 4);
 
 
 
@@ -27,26 +26,11 @@ colors.on('track', function (event) {
     // No colors were detected in this frame.
   } else {
     event.data.forEach(function (rect) {
-      if (currentLevel === 2) {
-        if (rect.color === 'magenta') {
-          ballSize += 1;
-        }
-        if (rect.color === 'cyan') {
-          ballSize -= 1;
-        }
-      } else {
-        if (rect.color === 'magenta') {
-          drawBrick(rect);
-        }
-        if (rect.color === 'cyan') {
-          eraseBrick(rect);
-        }
+      if (rect.color === 'magenta') {
+        drawBrick(rect);
       }
-
-      if (ballSize > 15) {
-        ballSize = 15;
-      } else if (ballSize < 6) {
-        ballSize = 6;
+      if (rect.color === 'cyan') {
+        eraseBrick(rect);
       }
     });
   }
@@ -319,10 +303,7 @@ function eraseBrick(rect) {
 
 function createBall() {
   let randX = Math.floor(Math.random() * globalWidth);
-
-  if (currentLevel !== 2) {
-    ballSize = 6 + Math.floor(Math.random() * 4);
-  }
+  const ballSize = 6 + Math.floor(Math.random() * 10);
 
   let ball = Bodies.circle(
     randX,
