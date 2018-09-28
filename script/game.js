@@ -58,7 +58,7 @@ let render = Render.create({
 
 // Bodies references
 let bricks = [];
-let ground = Bodies.rectangle(0, globalHeight + 100, globalWidth * 2, 100, { isStatic: true, label: 'Ground' });
+let ground = Bodies.rectangle(0, globalHeight + 100, globalWidth * 200, 100, { isStatic: true, label: 'Ground' });
 
 World.add(engine.world, ground);
 /* ============ Ground end ================ */
