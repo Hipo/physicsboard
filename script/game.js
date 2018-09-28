@@ -124,7 +124,7 @@ World.add(engine.world, targetBucket);
 /* ================ Obstacles ===================== */
 const obstacles = [];
 
-const curve1 = Bodies.rectangle(80, 150, 200, 5, {
+const curve1 = Bodies.rectangle(50, globalHeight / 4, globalWidth / 3.5, 5, {
   isStatic: true,
   render: {
     fillStyle: 'white'
@@ -133,7 +133,7 @@ const curve1 = Bodies.rectangle(80, 150, 200, 5, {
 Matter.Body.rotate(curve1, PI / 9);
 obstacles.push(curve1);
 
-const curve2 = Bodies.rectangle(360, 300, 250, 5, {
+const curve2 = Bodies.rectangle(globalWidth * (1.5 / 3), globalHeight / 2, globalWidth / 5, 5, {
   isStatic: true,
   render: {
     fillStyle: 'white'
@@ -230,20 +230,20 @@ function finishGame(type) {
     document.body.appendChild(gameEndMessageElem);
     isFinished = true;
 
-    if (type === 'fail') {
-      document.querySelector('.retry-button').addEventListener('click', handleRetryEvent);
-    } else {
-      let newLevel = +window.location.pathname.match(/[1-9]+/)[0] + 1;
+    // if (type === 'fail') {
+    //   document.querySelector('.retry-button').addEventListener('click', handleRetryEvent);
+    // } else {
+    //   let newLevel = +window.location.pathname.match(/[1-9]+/)[0] + 1;
 
-      if (newLevel < 2) {
-        // next level
-        setTimeout(function() {
-          window.location.href = '/levels/' + newlevel;        
-        }, 1000);        
-      } else {
-        window.location.href = '/';
-      }
-    }
+    //   if (newLevel < 2) {
+    //     // next level
+    //     setTimeout(function() {
+    //       window.location.href = '/levels/' + newlevel;        
+    //     }, 1000);        
+    //   } else {
+    //     window.location.href = '/';
+    //   }
+    // }
   }
 }
 
